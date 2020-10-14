@@ -1,7 +1,7 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import useFetchAll from "./services/useFetchAll";
 import Spinner from "./Spinner";
+import { useNavigate } from "react-router-dom";
 
 export default function Cart({ cart, updateQuantity }) {
   const navigate = useNavigate();
