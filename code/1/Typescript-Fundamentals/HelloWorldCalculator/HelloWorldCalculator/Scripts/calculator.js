@@ -1,16 +1,13 @@
 window.onload = function () {
-    var calc = new Calculator();
-    calc.init('X', 'Y', 'Output');
+    var calc = new Calculator('X', 'Y', 'Output');
 };
 var Calculator = (function () {
-    function Calculator() {
-    }
-    Calculator.prototype.init = function (x, y, output) {
-        this.x = document.getElementById(x);
-        this.y = document.getElementById(y);
-        this.output = document.getElementById(output);
+    function Calculator(xId, yId, outputId) {
+        this.x = document.getElementById(xId);
+        this.y = document.getElementById(yId);
+        this.output = document.getElementById(outputId);
         this.wireEvents();
-    };
+    }
     Calculator.prototype.wireEvents = function () {
         var _this = this;
         document.getElementById('Add').addEventListener('click', function (event) {

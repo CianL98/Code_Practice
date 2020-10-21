@@ -1,6 +1,5 @@
 window.onload = function () {
-    var calc = new Calculator();
-    calc.init('X','Y','Output');
+    var calc = new Calculator('X','Y','Output');
 };
 
 class Calculator {
@@ -8,10 +7,10 @@ class Calculator {
     private y : HTMLInputElement;
     private output : HTMLSpanElement;
 
-    init(x: string, y: string, output: string) {
-        this.x = <HTMLInputElement>document.getElementById(x);
-        this.y = <HTMLInputElement>document.getElementById(y);
-        this.output = <HTMLSpanElement>document.getElementById(output);
+    constructor(xId: string, yId: string, outputId: string) {
+        this.x = <HTMLInputElement>document.getElementById(xId);
+        this.y = <HTMLInputElement>document.getElementById(yId);
+        this.output = <HTMLSpanElement>document.getElementById(outputId);
         this.wireEvents();
     }
 
