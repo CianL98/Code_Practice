@@ -1,6 +1,6 @@
 import { Category } from './enums';
 import { Book, DamageLogger, Author, Librarian } from './interfaces';
-import { UniversityLibrarian } from './classes';
+import { UniversityLibrarian, ReferenceItem, Encyclopedia } from './classes';
 
 function GetAllBooks(): Book[] {
 	
@@ -123,23 +123,25 @@ function PrintBook(book: Book): void {
 
 //*********************************************
 
-// let myBook: Book = {
-//     id: 5,
-//     title: 'Pride and Prejudice',
-//     author: 'Jane Austen',
-//     available: true,
-//     category: Category.Fiction,
-//     pages: 250,
-//     markDamaged: (reason: string) => console.log('Damaged: ' + reason)
-// };
+// let ref: ReferenceItem = new ReferenceItem('Updated Facts and Figures', 2012);
+// ref.printItem();
+// ref.publisher = 'Random Data Publishing';
+// console.log(ref.publisher);
 
-// PrintBook(myBook);
-// myBook.markDamaged('torn pages');
+// let refBook: ReferenceItem = new Encyclopedia('WorldPedia', 1900, 10);
+// refBook.printCitation();
 
-// let logDamage: DamageLogger;
-// logDamage = (damage: string) => console.log('Damage reported: ' + damage);
-// logDamage('coffee stains');
+let Newspaper = class extends ReferenceItem {
+    printCitation(): void {
+        console.log(`Newspaper: ${this.title}`);
+    }
+}
 
-let favoriteLibrarian: Librarian = new UniversityLibrarian();
-favoriteLibrarian.name = 'Sharon';
-favoriteLibrarian.assistCustomer('Lynda');
+let myPaper = new Newspaper('The Gazette', 2016);
+myPaper.printCitation();
+
+class Novel extends class { title: string } {
+    mainCharacter: string;
+}
+
+let favoriteNovel = new Novel();
