@@ -1,5 +1,4 @@
 var enums_1 = require('./enums');
-var classes_1 = require('./classes');
 function GetAllBooks() {
     var books = [
         { id: 1, title: 'Ulysses', author: 'James Joyce', available: true, category: enums_1.Category.Fiction },
@@ -101,21 +100,4 @@ function PrintBook(book) {
     console.log(book.title + ' by ' + book.author);
 }
 //*********************************************
-// let myBook: Book = {
-//     id: 5,
-//     title: 'Pride and Prejudice',
-//     author: 'Jane Austen',
-//     available: true,
-//     category: Category.Fiction,
-//     pages: 250,
-//     markDamaged: (reason: string) => console.log('Damaged: ' + reason)
-// };
-// PrintBook(myBook);
-// myBook.markDamaged('torn pages');
-// let logDamage: DamageLogger;
-// logDamage = (damage: string) => console.log('Damage reported: ' + damage);
-// logDamage('coffee stains');
-var favoriteLibrarian = new classes_1.UniversityLibrarian();
-favoriteLibrarian.name = 'Sharon';
-favoriteLibrarian.assistCustomer('Lynda');
 //# sourceMappingURL=app.js.map
