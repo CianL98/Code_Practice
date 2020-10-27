@@ -21,4 +21,3 @@ var Encyclopedia = (function (_super) {
 })(classes_1.ReferenceItem);
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = Encyclopedia;
-//# sourceMappingURL=encyclopedia.js.map
