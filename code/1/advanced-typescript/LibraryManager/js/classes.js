@@ -1,57 +1,62 @@
 "use strict";
-var Employee = (function () {
-    function Employee() {
-    }
-    Employee.prototype.addToSchedule = function () {
+class Employee {
+    addToSchedule() {
         console.log('Employee added to schedule.');
-    };
-    Employee.prototype.logTitle = function () {
+    }
+    logTitle() {
         ;
-        console.log("Employee has the title " + this.title + ".");
-    };
-    return Employee;
-}());
+        console.log(`Employee has the title ${this.title}.`);
+    }
+}
 exports.Employee = Employee;
-var Researcher = (function () {
-    function Researcher() {
+class Researcher {
+    doResearch(topic) {
+        console.log(`Doing research on ${topic}.`);
     }
-    Researcher.prototype.doResearch = function (topic) {
-        console.log("Doing research on " + topic + ".");
-    };
-    return Researcher;
-}());
+}
 exports.Researcher = Researcher;
-var UniversityLibrarian = (function () {
-    function UniversityLibrarian() {
+exports.CLASS_INFO = Symbol();
+class UniversityLibrarian {
+    [exports.CLASS_INFO]() {
+        console.log('This class represents a UniversityLibrarian.');
     }
-    UniversityLibrarian.prototype.assistCustomer = function (custName) {
+    static [Symbol.hasInstance](obj) {
+        return obj.hasOwnProperty('name') && obj.hasOwnProperty('assistCustomer');
+    }
+    assistCustomer(custName) {
         console.log(this.name + ' is assisting ' + custName);
-    };
-    return UniversityLibrarian;
-}());
+    }
+    assistFaculty() {
+        console.log('Assisting faculty.');
+    }
+}
 exports.UniversityLibrarian = UniversityLibrarian;
-var ReferenceItem = (function () {
-    function ReferenceItem(title, year) {
+class PublicLibrarian {
+    assistCustomer(custName) {
+        console.log('Assisting customer.');
+    }
+    teachCommunity() {
+        console.log('Teaching community.');
+    }
+}
+exports.PublicLibrarian = PublicLibrarian;
+class ReferenceItem {
+    constructor(title, year) {
         this.title = title;
         this.year = year;
         console.log('Creating a new ReferenceItem...');
     }
-    ReferenceItem.prototype.printItem = function () {
-        console.log(this.title + " was published in " + this.year + ".");
-        console.log("Department: " + ReferenceItem.department);
-    };
-    Object.defineProperty(ReferenceItem.prototype, "publisher", {
-        get: function () {
-            return this._publisher.toUpperCase();
-        },
-        set: function (newPublisher) {
-            this._publisher = newPublisher;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    ReferenceItem.department = 'Research';
-    return ReferenceItem;
-}());
+    printItem() {
+        console.log(`${this.title} was published in ${this.year}.`);
+        console.log(`Department: ${ReferenceItem.department}`);
+    }
+    get publisher() {
+        return this._publisher.toUpperCase();
+    }
+    set publisher(newPublisher) {
+        this._publisher = newPublisher;
+    }
+}
+ReferenceItem.department = 'Research';
 exports.ReferenceItem = ReferenceItem;
 //# sourceMappingURL=classes.js.map

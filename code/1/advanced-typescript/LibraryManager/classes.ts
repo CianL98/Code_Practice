@@ -1,6 +1,6 @@
 import * as Interfaces from './interfaces';
 
-class Employee {
+export class Employee {
     title: string;
 
     addToSchedule(): void {
@@ -12,21 +12,35 @@ class Employee {
     }
 }
 
-class Researcher {
+export class Researcher {
 
     doResearch(topic: string): void {
         console.log(`Doing research on ${topic}.`);
     }
 }
 
-class UniversityLibrarian implements Interfaces.Librarian, Employee, Researcher {
+export const CLASS_INFO = Symbol();
+
+export class UniversityLibrarian implements Interfaces.Librarian, Employee, Researcher {
     
     name: string;
     email: string;
     department: string;
+
+    [CLASS_INFO](): void {
+        console.log('This class represents a UniversityLibrarian.');
+    }
+
+    static [Symbol.hasInstance](obj: Object) {
+        return obj.hasOwnProperty('name') && obj.hasOwnProperty('assistCustomer');
+    }
     
     assistCustomer(custName: string) {
         console.log(this.name + ' is assisting ' + custName);
+    }
+
+    assistFaculty() {
+        console.log('Assisting faculty.');
     }
 
 	// implementation of the following to be provided by the mixing function
@@ -36,7 +50,22 @@ class UniversityLibrarian implements Interfaces.Librarian, Employee, Researcher 
     doResearch: (topic: string) => void;    
 }
 
-abstract class ReferenceItem {
+export class PublicLibrarian implements Interfaces.Librarian {
+
+    name: string;
+    email: string;
+    department: string;
+
+    assistCustomer(custName: string) {
+        console.log('Assisting customer.');
+    }
+
+    teachCommunity() {
+        console.log('Teaching community.');
+    }
+}
+
+export abstract class ReferenceItem {
     
     private _publisher: string;
     static department: string = 'Research';
@@ -60,5 +89,3 @@ abstract class ReferenceItem {
     
     abstract printCitation(): void;
 }
-
-export { UniversityLibrarian, ReferenceItem, Employee, Researcher };

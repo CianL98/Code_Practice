@@ -1,61 +1,95 @@
 "use strict";
-var enums_1 = require('./enums');
-var classes_1 = require('./classes');
-var util = require('./lib/utilityFunctions');
-function PrintBookInfo(_a) {
-    var booktitle = _a.title, bookauthor = _a.author;
-    console.log(booktitle + " was authored by " + bookauthor);
+const classes_1 = require('./classes');
+require('./LibrarianExtension');
+class LibraryBook {
+    Checkout() {
+        // do checkout stuff
+        console.log('Checking out a book.');
+        return this;
+    }
+    Checkin() {
+        // do checkin stuff
+        //console.log('Checking in a book.');
+        if (this instanceof ChildrensBook) {
+            console.log('Checking in a ChildrensBook.');
+        }
+        if (this instanceof ElectronicBook) {
+            console.log('Checking in an ElectronicBook.');
+        }
+        return this;
+    }
 }
-var _a = util.GetAllBooks(), book1 = _a[0], book2 = _a[1];
-function LogFavoriteBooks(_a) {
-    var book1 = _a[0], book2 = _a[1], others = _a.slice(2);
-    PrintBookInfo(book1);
-    PrintBookInfo(book2);
-    console.log(others);
+class ChildrensBook extends LibraryBook {
+    Clean() {
+        // clean the crayon marks
+        console.log('Cleaning a book.');
+        return this;
+    }
 }
-// LogFavoriteBooks(util.GetAllBooks());
-// let { title: booktitle, author: bookauthor } = book1;
-// console.log(booktitle);
-// console.log(bookauthor);
-// PrintBookInfo(book1);
-var schoolBooks = [
-    { id: 10, title: 'The Great Gatsby', author: 'F. Scott Fitzgerald', available: true, category: enums_1.Category.Fiction },
-    { id: 11, title: 'Crime and Punishment', author: 'Fyodor Dostoevsky', available: true, category: enums_1.Category.Fiction },
-    { id: 12, title: 'Clear Light of Day', author: 'Anita Desai', available: true, category: enums_1.Category.Fiction }
-];
-var booksRead = util.GetAllBooks();
-booksRead.push.apply(booksRead, schoolBooks);
-// console.log(booksRead);
-var poets = ['Shelley', 'Collins', 'Hughes'];
-var authors = ['Tolstoy', 'Fitzgerald'].concat(poets);
-var catalogLocation = ['A 123.456', book1];
-catalogLocation[2] = 'some string';
-var allBooks = util.GetAllBooks();
-var allMagazines = util.GetAllMagazines();
-var readingMaterial = allBooks[0];
-function PrintTitle(item) {
-    console.log(item.title);
+class ElectronicBook extends LibraryBook {
+    RemoveFromCustomerDevice() {
+        console.log('Removing book from device.');
+        return this;
+    }
 }
-// PrintTitle(allBooks[0]);
-// PrintTitle(allMagazines[0]);
-var serialNovel = {
-    id: 100,
-    title: 'The Gradual Tale',
-    author: 'Occasional Pen',
-    available: true,
-    category: enums_1.Category.Fiction,
-    publisher: 'Serial Press'
+// let kidbook = new ChildrensBook();
+// kidbook.Checkin()
+//     .Clean()
+//     .Checkout();
+// let ebook = new ElectronicBook();
+// ebook.Checkin()
+//     .RemoveFromCustomerDevice()
+//     .Checkout();
+// let mergedBook: Book;
+// mergedBook.publisher = 'Programming Press';
+// let newLibrarian = new UniversityLibrarian();
+// newLibrarian.phone = '555-6789';
+// newLibrarian.hostSeminar('British Literature');
+function logVisitor(param) {
+    if (typeof param === 'number') {
+        console.log(`${param} new visitors arrived.`);
+    }
+    else {
+        console.log(`${param.toUpperCase()} visited.`);
+    }
+}
+// logVisitor(5);
+// logVisitor('Leigh Ann');
+// let lib: Librarian = new PublicLibrarian();
+// if (lib instanceof UniversityLibrarian) {
+//     lib.assistFaculty();
+// }
+// if (lib instanceof PublicLibrarian) {
+//     lib.teachCommunity();
+// }
+// function isBook(text: Book | Magazine): text is Book {
+//     return (<Book>text).author !== undefined;
+// }
+// let readingMaterial: Book | Magazine = util.GetAllBooks()[0];
+// if(isBook(readingMaterial)) {
+//     console.log(`The book's author is ${readingMaterial.author}.`);
+// }
+// else {
+//     console.log(`The magazine's publisher is ${readingMaterial.publisher}.`);
+// }
+let mySymbol = Symbol('first_symbol');
+let anotherSymbol = Symbol('first_symbol');
+// console.log(mySymbol === anotherSymbol);
+// console.log(typeof mySymbol);
+let myObject = {
+    [mySymbol]: 'value for my symbol key'
 };
-function applyMixins(derivedCtor, baseCtors) {
-    baseCtors.forEach(function (baseCtor) {
-        Object.getOwnPropertyNames(baseCtor.prototype).forEach(function (name) {
-            derivedCtor.prototype[name] = baseCtor.prototype[name];
-        });
-    });
+// console.log(myObject[mySymbol]);
+let librarian = new classes_1.UniversityLibrarian();
+// librarian[CLASS_INFO]();
+let libraryCustomer = {
+    name: 'Thorne',
+    assistCustomer: (custName) => console.log(`Assisting ${custName}`)
+};
+if (libraryCustomer instanceof classes_1.UniversityLibrarian) {
+    console.log('A helpful librarian.');
 }
-applyMixins(classes_1.UniversityLibrarian, [classes_1.Employee, classes_1.Researcher]);
-var newLibrarian = new classes_1.UniversityLibrarian();
-function GetMagazineByFrequency(preferredFrequency) {
-    // do something here
+else {
+    console.log('Not a librarian.');
 }
 //# sourceMappingURL=app.js.map
