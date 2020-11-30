@@ -65,8 +65,6 @@ export function LogFirstAvailable(books = GetAllBooks()): void {
 
 export function GetBookTitlesByCategory(categoryFilter: Category = Category.Fiction): Array<string> {
 	
-	console.log('Getting books in category: ' + Category[categoryFilter]);
-	
 	const allBooks = GetAllBooks();
 	const filteredTitles: string[] = [];
 	

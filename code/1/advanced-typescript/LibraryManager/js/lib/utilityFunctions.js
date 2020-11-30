@@ -58,7 +58,6 @@ function LogFirstAvailable(books) {
 exports.LogFirstAvailable = LogFirstAvailable;
 function GetBookTitlesByCategory(categoryFilter) {
     if (categoryFilter === void 0) { categoryFilter = enums_1.Category.Fiction; }
-    console.log('Getting books in category: ' + enums_1.Category[categoryFilter]);
     var allBooks = GetAllBooks();
     var filteredTitles = [];
     for (var _i = 0, allBooks_1 = allBooks; _i < allBooks_1.length; _i++) {
