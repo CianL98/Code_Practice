@@ -1,4 +1,5 @@
 import * as Interfaces from './interfaces';
+import { sealed, logger, writable } from './decorators';
 
 export class Employee {
     title: string;
@@ -19,26 +20,19 @@ export class Researcher {
     }
 }
 
-export const CLASS_INFO = Symbol();
-
+// @logger
+// @sealed('UniversityLibrarian')
 export class UniversityLibrarian implements Interfaces.Librarian, Employee, Researcher {
     
     name: string;
     email: string;
     department: string;
 
-    [CLASS_INFO](): void {
-        console.log('This class represents a UniversityLibrarian.');
-    }
-
-    static [Symbol.hasInstance](obj: Object) {
-        return obj.hasOwnProperty('name') && obj.hasOwnProperty('assistCustomer');
-    }
-    
     assistCustomer(custName: string) {
         console.log(this.name + ' is assisting ' + custName);
     }
 
+    @writable(true)
     assistFaculty() {
         console.log('Assisting faculty.');
     }
@@ -50,6 +44,7 @@ export class UniversityLibrarian implements Interfaces.Librarian, Employee, Rese
     doResearch: (topic: string) => void;    
 }
 
+// @logger
 export class PublicLibrarian implements Interfaces.Librarian {
 
     name: string;
@@ -60,6 +55,7 @@ export class PublicLibrarian implements Interfaces.Librarian {
         console.log('Assisting customer.');
     }
 
+    @writable(false)
     teachCommunity() {
         console.log('Teaching community.');
     }

@@ -19,4 +19,3 @@ var Shelf = (function () {
 }());
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = Shelf;
-//# sourceMappingURL=shelf.js.map
